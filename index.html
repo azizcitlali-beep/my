@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genshin Impact — Artikel Multi Kolom</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #f4f5fb;
+    font-family: "Inter", sans-serif;
+    color: #222;
+    overflow-x: hidden;
+    transition: 0.4s;
+}
+.dark-mode { background: #11121a; color: #ddd; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: 0.8s; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 0;
+    transition: 0.4s;
+}
+.dark-mode header {
+    background: rgba(20,20,28,0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.nav {
+    max-width: 1300px; margin: auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px;
+}
+.logo {
+    font-family: "Cinzel"; font-size: 28px; font-weight: 700;
+}
+
+.btn-play {
+    padding: 8px 16px;
+    background: linear-gradient(to bottom, #e6d2a8, #c9ae7a);
+    border-radius: 8px; color: #fff;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.toggle-dark {
+    margin-left: 15px; cursor: pointer;
+    padding: 7px 14px; border-radius: 6px;
+    background: #222; color: #fff;
+}
+
+.small-banner {
+    max-width: 1300px;
+    margin: 18px auto;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 3px solid #d6c298;
+    background: #fffdf4;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.small-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.dark-mode .small-banner {
+    background: #1e1d26;
+    border-color: #8e7a4a;
+}
+
+.time-box {
+    max-width: 1300px;
+    margin: 20px auto 0 auto;
+    padding: 14px 20px;
+    background: #fffdf4;
+    border: 3px solid #d6c298;
+    border-radius: 12px;
+    font-family: "Cinzel", serif;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+.dark-mode .time-box {
+    background: #1e1d26;
+    border-color: #8e7a4a;
+    color: #e8e4d9;
+}
+
+.hero {
+    height: 430px;
+    background-image: url('https://upload-os-bbs.hoyolab.com/upload/2023/06/12/2222222.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.particles {
+    position: absolute; inset: 0;
+    overflow: hidden; pointer-events: none;
+}
+.particles span {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+    from { transform: translateY(80vh); opacity: 0; }
+    30% { opacity: 1; }
+    to { transform: translateY(-20vh); opacity: 0; }
+}
+
+.article-container {
+    max-width: 1000px; margin: auto;
+    margin-top: -80px; margin-bottom: 40px;
+    background: #fffffff5;
+    border-radius: 18px;
+    padding: 45px;
+    border: 3px solid #d6c298;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    backdrop-filter: blur(5px);
+}
+.dark-mode .article-container {
+    background: #1b1b25d9; border-color: #74633f;
+}
+
+.article-title {
+    font-family: "Cinzel"; font-size: 40px;
+    margin-bottom: 10px;
+}
+.meta { color: #777; margin-bottom: 25px; }
+.dark-mode .meta { color: #aaa; }
+
+.multi-column {
+    column-count: 3;
+    column-gap: 40px;
+    text-align: justify;
+    margin: 35px 0;
+}
+@media(max-width:1100px){ .multi-column { column-count: 2; } }
+@media(max-width:700px){ .multi-column { column-count: 1; } }
+
+.highlight {
+    background: #faf5e6;
+    border-left: 5px solid #d7be88;
+    padding: 18px 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.dark-mode .highlight {
+    background: #27231c; border-color: #a89263;
+}
+
+.gallery {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(3,1fr);
+    margin: 35px 0;
+}
+.gallery img {
+    width: 100%; border-radius: 12px;
+    height: 180px; object-fit: cover;
+    transition: 0.35s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.gallery img:hover { transform: scale(1.05); }
+
+.info-grid {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+.info-card {
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 2px solid #e1d4b4;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+.info-card:hover { transform: translateY(-6px); }
+.dark-mode .info-card {
+    background: #23232e; border-color: #776848;
+}
+
+.related {
+    margin-top: 60px;
+}
+.related h3 { font-family: "Cinzel"; }
+.related-cards {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+.card {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    border: 2px solid #ebdcc2;
+}
+.card:hover { transform: translateY(-5px); }
+.dark-mode .card {
+    background: #23232d; border-color: #7b6b4c;
+}
+.card img {
+    width: 100%; height: 130px; object-fit: cover;
+    border-radius: 10px; margin-bottom: 8px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}
+.dark-mode footer { color: #999; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">Genshin Impact</div>
+        <nav>
+            <ul style="display:flex; gap:18px; list-style:none; margin:0;">
+                <li><a href="UAS.html" style="text-decoration:none; color:inherit;font-weight:700">Home</a></li>
+                <li><a href="UAS Halaman 2.html" style="text-decoration:none; color:inherit;">Pengetahuan</a></li>
+                <li><a href="UAS Halaman 3.html" style="text-decoration:none; color:inherit;">Gallery</a></li>
+                <li><a href="UAS Halaman 4.html" style="text-decoration:none; color:inherit">Formulir</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a class="btn-play">Download</a>
+            <span class="toggle-dark" onclick="dark()">Mode</span>
+        </div>
+    </div>
+</header>
+
+<div class="small-banner">
+    <img src="https://fastcdn.hoyoverse.com/content-v2/plat/124031/5d2ba4371115d26de4c574b28311aed8_3702783840928167787.jpeg">
+</div>
+
+<div class="time-box" id="genshinTime"></div>
+
+<div class="hero">
+    <div class="particles" id="particles"></div>
+</div>
+
+<div class="article-container reveal">
+    <h1 class="article-title">Mengenal Luas Tentang Teyvat Itu Sendiri</h1>
+    <div class="meta">Posted 28 September 2020 · HoYoverse</div>
+
+    <div class="Multi">
+        Teyvat dikenal sebagai dunia penuh keindahan, elemen, dan petualangan. Namun di balik permukaan yang cerah itu, dunia ini menyimpan sejarah kelam, manipulasi ilahi, perang antar entitas kosmik, serta kebenaran yang sengaja disembunyikan dari manusia. Artikel ini merangkum sisi tergelap Teyvat berdasarkan lore resmi tanpa spekulasi berlebihan.
+    </div>
+
+    <div class="highlight reveal">
+        <strong>“Langit di Teyvat adalah sebuah kepalsuan...”</strong>
+    </div>
+
+    <div class="gallery reveal">
+        <img src="https://i.ytimg.com/vi/xGiQP9eKRNg/maxresdefault.jpg">
+        <img src="https://static.wikia.nocookie.net/hoducks/images/f/f8/Imaginary_Tree_Small.png">
+        <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/11/door.jpg?w=1600&h=900&fit=crop">
+    </div>
+
+    <div class="info-grid reveal">
+        <div class="info-card">
+            <h3>Apa itu Langit Palsu?</h3>
+            <p>Descenders pertama membuat cangkang untuk teyvat?</p>
+        </div>
+        <div class="info-card">
+            <h3>Imaginary Tree</h3>
+            <p>Zenless Zone Zero tidak termasuk dalam Imaginary Tree?</p>
+        </div>
+        <div class="info-card">
+            <h3>Gerbang Khaenriah</h3>
+            <p>Ternyata benar, ini adalah gerbang Khaenriah</p>
+        </div>
+    </div>
+
+    <div class="related reveal">
+        <h3>Artikel Terkait</h3>
+        <div class="related-cards">
+            <div class="card">
+                <img src="https://gamebrott.com/wp-content/uploads/2023/11/Feature-8-1024x602.webp">
+                <div><b>Fontaine Arc</b></div>
+            </div>
+            <div class="card">
+                <img src="https://gamebrott.com/wp-content/uploads/2025/01/natlan-archon-quest.jpg">
+                <div><b>Natlan Arc</b></div>
+            </div>
+            <div class="card">
+                <img src="https://i.redd.it/ae818jnbfgof1.jpeg">
+                <div><b>Nod krai Arc</b></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>© M.Aziz Atha Ramadhan - 251011700819 - 01SIFP015</footer>
+
+<script>
+function dark(){
+    document.body.classList.toggle("dark-mode");
+}
+
+function createParticles(){
+    const container = document.getElementById("particles");
+    for(let i=0; i<70; i++){
+        let s = document.createElement("span");
+        s.style.left = Math.random()*100 + "%";
+        s.style.animationDelay = Math.random()*6 + "s";
+        container.appendChild(s);
+    }
+}
+createParticles();
+
+window.addEventListener("scroll",()=>{
+    document.querySelectorAll(".reveal").forEach(el=>{
+        if(el.getBoundingClientRect().top < innerHeight - 80)
+            el.classList.add("active");
+    });
+});
+
+function penentuanWaktu() {
+    const jam = new Date().getHours();
+    if(jam >= 4 && jam < 11) return "Selamat Pagi, Traveler.";
+    if(jam >= 11 && jam < 15) return "Selamat Siang, Traveler.";
+    if(jam >= 15 && jam < 18) return "Selamat Sore, Traveler.";
+    return "Selamat Malam, Traveler.";
+}
+
+function updateJamGenshin() {
+    const now = new Date();
+    const j = now.getHours().toString().padStart(2,"0");
+    const m = now.getMinutes().toString().padStart(2,"0");
+    const s = now.getSeconds().toString().padStart(2,"0");
+
+    document.getElementById("genshinTime").innerHTML =
+        `<b>${penentuanWaktu()}</b> — ${j}:${m}:${s}`;
+}
+
+setInterval(updateJamGenshin, 1000);
+updateJamGenshin();
+</script>
+
+</body>
+</html>
