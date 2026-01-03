@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery Teyvat — Genshin Impact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #0d0f17;
+    font-family: "Inter", sans-serif;
+    color: #ddd;
+    overflow-x: hidden;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(20,20,28,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 0;
+    transition: 0.4s;
+}
+.nav {
+    max-width: 1300px; margin: auto;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 20px;
+}
+.logo {
+    font-family: "Cinzel"; font-size: 28px; font-weight: 700;
+    color: white;
+}
+.nav ul {
+    display: flex; gap: 22px;
+    list-style: none;
+}
+.nav a {
+    text-decoration: none;
+    color: #ddd;
+    font-weight: 500;
+}
+.toggle-dark {
+    margin-left: 15px; cursor: pointer;
+    padding: 7px 14px; border-radius: 6px;
+    background: #222; color: #fff;
+}
+
+.hero {
+    height: 330px;
+    background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/04/genshin-impact-teyvat.jpg?q=50&fit=crop&w=1500&dpr=1.5');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+.particles {
+    position: absolute; inset: 0;
+    overflow: hidden; pointer-events: none;
+}
+.particles span {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+    from { transform: translateY(80vh); opacity: 0; }
+    30% { opacity: 1; }
+    to { transform: translateY(-20vh); opacity: 0; }
+}
+
+.gallery-container {
+    max-width: 1150px;
+    margin: auto;
+    margin-top: -70px;
+    background: #14141cdd;
+    padding: 35px;
+    border: 3px solid #c9b27d;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    padding: 10px 18px;
+    background: #1d1d29;
+    border: 2px solid #c9b27d;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Cinzel;
+    color: #e8e5d2;
+    transition: 0.25s;
+}
+.tab-btn.active, .tab-btn:hover {
+    background: #c9b27d;
+    color: #14141c;
+}
+
+.gallery-grid {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+.gallery-grid.active { display: grid; }
+
+.gallery-grid img {
+    width: 100%;
+    height: 210px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: 0.35s;
+}
+.gallery-grid img:hover {
+    transform: scale(1.06);
+}
+
+@media(max-width:900px){ .gallery-grid{grid-template-columns: repeat(2,1fr);} }
+@media(max-width:600px){ .gallery-grid{grid-template-columns: repeat(1,1fr);} }
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo">Genshin Impact</div>
+        <ul style="display:flex; gap:18px; list-style:none; margin:0;">
+                <li><a href="UAS.html" style="text-decoration:none; color:inherit;">Home</a></li>
+                <li><a href="UAS Halaman 2.html" style="text-decoration:none; color:inherit;">Pengetahuan</a></li>
+                <li><a href="UAS Halaman 3.html" style="text-decoration:none; color:inherit;font-weight:700">Gallery</a></li>
+                <li><a href="UAS Halaman 4.html" style="text-decoration:none; color:inherit">Formulir</a></li>
+        </ul>
+        <span class="toggle-dark" onclick="dark()"></span>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="particles" id="particles"></div>
+</div>
+
+<div class="gallery-container">
+
+    <h1 style="font-family:Cinzel; font-size:36px; margin-bottom:25px;">
+        Gallery Teyvat
+    </h1>
+
+    
+    <div class="tabs">
+        <div class="tab-btn active" onclick="openTab('mondstadt')">Mondstadt</div>
+        <div class="tab-btn" onclick="openTab('liyue')">Liyue</div>
+        <div class="tab-btn" onclick="openTab('inazuma')">Inazuma</div>
+        <div class="tab-btn" onclick="openTab('sumeru')">Sumeru</div>
+        <div class="tab-btn" onclick="openTab('fontaine')">Fontaine</div>
+        <div class="tab-btn" onclick="openTab('natlan')">Natlan</div>
+    </div>
+
+    <div id="mondstadt" class="gallery-grid active">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/b/b9/Mondstadt.png/revision/latest?cb=20230818202148">
+        <img src="https://webstatic.hoyoverse.com/upload/uploadstatic/contentweb/20191028/2019102814464357547.jpg">
+        <img src="https://i.redd.it/62d65t1g5ffc1.png">
+    </div>
+
+    <div id="liyue" class="gallery-grid">
+        <img src="https://gamebrott.com/wp-content/uploads/2023/02/Untitled-1-1.jpg">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/0/03/Liyue.png/revision/latest?cb=20230905083920">
+        <img src="https://images2.alphacoders.com/117/1175592.png">
+    </div>
+
+    <div id="inazuma" class="gallery-grid">
+        <img src="https://gamebrott.com/wp-content/uploads/2022/12/Untitled-1-7.jpg">
+        <img src="https://static1.thegamerimages.com/wordpress/wp-content/uploads/2021/07/Genshin-Impact-Inazuma-docks.jpg">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/2/2f/Inazuma.png/revision/latest?cb=20230818202755">
+    </div>
+
+    <div id="sumeru" class="gallery-grid">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/6/68/Sumeru_City.png/revision/latest?cb=20220815102704">
+        <img src="https://row.haluan.co/wp-content/uploads/2024/03/genshin-impact-sumeru-tree-city.jpg">
+        <img src="https://cdn2.unrealengine.com/01-3840x2160-daa2547ad5b8.jpg">
+    </div>
+
+    <div id="fontaine" class="gallery-grid">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/8/8d/Fontaine.png/revision/latest?cb=20230819002539">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/a/a9/Court_of_Fontaine.png/revision/latest?cb=20240428165727">
+        <img src="https://gamebrott.com/wp-content/uploads/2023/08/map-fontaine-genshin-impact.jpg">
+    </div>
+
+    <div id="natlan" class="gallery-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/7c/Stadium_of_the_Sacred_Flame.png">
+        <img src="https://i.redd.it/5wmrjssnpnmd1.jpeg">
+        <img src="https://static.wikia.nocookie.net/gensin-impact/images/4/43/Ancient_Sacred_Mountain.png/revision/latest/scale-to-width-down/1200?cb=20250809132724">
+    </div>
+
+</div>
+
+<script>
+function dark(){
+    document.body.classList.toggle("dark-mode");
+}
+
+function createParticles(){
+    const container = document.getElementById("particles");
+    for(let i=0; i<70; i++){
+        let s = document.createElement("span");
+        s.style.left = Math.random()*100 + "%";
+        s.style.animationDelay = Math.random()*6 + "s";
+        container.appendChild(s);
+    }
+}
+createParticles();
+
+function openTab(name){
+    document.querySelectorAll(".gallery-grid").forEach(g=>g.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    document.getElementById(name).classList.add("active");
+    event.target.classList.add("active");
+}
+</script>
+
+</body>
+</html>
